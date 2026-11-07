@@ -344,11 +344,11 @@ a { color: inherit; }
 
 /* Ice, straw, spoon */
 .ice { position: absolute; z-index: 2; width: 1.7em; height: 1.6em; border-radius: .3em; background: linear-gradient(135deg, rgba(255,255,255,.58), rgba(255,255,255,.14) 55%, rgba(255,255,255,.32)); box-shadow: inset 0 0 0 .07em rgba(255,255,255,.6), inset -.2em -.2em .3em rgba(255,255,255,.14); }
-.ice { --r: 0deg; transform: rotate(var(--r)); animation: ice-bob 4.2s ease-in-out infinite; }
-.ice:nth-of-type(1) { left: 10%; bottom: calc(var(--fill) - 1.2em); --r: -12deg; animation-duration: 3.8s; }
-.ice:nth-of-type(2) { left: 47%; bottom: calc(var(--fill) - 2.1em); --r: 16deg; animation-duration: 4.6s; animation-delay: -1.3s; }
-.ice:nth-of-type(3) { left: 20%; bottom: calc(var(--fill) - 3.6em); --r: 8deg; width: 1.5em; height: 1.4em; animation-duration: 5.2s; animation-delay: -2.4s; }
-.ice:nth-of-type(4) { left: 52%; bottom: calc(var(--fill) - 4.5em); --r: -20deg; width: 1.4em; height: 1.4em; animation-duration: 4.4s; animation-delay: -.7s; }
+.ice { --r: 0deg; transform: rotate(var(--r)); animation: ice-bob 3s ease-in-out infinite; }
+.ice:nth-of-type(1) { left: 10%; bottom: calc(var(--fill) - 1.2em); --r: -12deg; animation-duration: 2.7s; }
+.ice:nth-of-type(2) { left: 47%; bottom: calc(var(--fill) - 2.1em); --r: 16deg; animation-duration: 3.2s; animation-delay: -1.3s; }
+.ice:nth-of-type(3) { left: 20%; bottom: calc(var(--fill) - 3.6em); --r: 8deg; width: 1.5em; height: 1.4em; animation-duration: 3.6s; animation-delay: -2.4s; }
+.ice:nth-of-type(4) { left: 52%; bottom: calc(var(--fill) - 4.5em); --r: -20deg; width: 1.4em; height: 1.4em; animation-duration: 3.1s; animation-delay: -.7s; }
 /* Ice cubes bob gently, like they float in the drink */
 @keyframes ice-bob {
   0%, 100% { transform: translateY(0) rotate(var(--r)); }
