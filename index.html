@@ -427,6 +427,9 @@ a { color: inherit; }
 .photo { position: absolute; inset: 0; z-index: 2; display: block; }
 .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
+.stage:has(.photo) { height: min(78vw, 340px); padding-bottom: 0; }
+.stage .photo { display: grid; place-items: center; }
+.stage .photo img { width: auto; height: 100%; max-width: 100%; aspect-ratio: 1; object-fit: cover; -webkit-mask-image: radial-gradient(closest-side, #000 78%, transparent); mask-image: radial-gradient(closest-side, #000 78%, transparent); }
 /* =====================================================================
    10. REDUCED MOTION
    ===================================================================== */
@@ -626,31 +629,31 @@ const ITEMS = [
     art: { vessel: "glass", fill: 86, ice: true, straw: true, layers: [["condensed", 2.2], ["milk", 4], ["latteMix", 1], ["espresso", 2.2]] } },
 
   /* ---------- Sweets ---------- */
-  { id: "tart", cat: "sweets", price: 4000, sizes: false, extras: [], badges: [], img: "",
+  { id: "tart", cat: "sweets", price: 4000, sizes: false, extras: [], badges: [], img: "images/tart.jpg",
     name: { ar: "تارت", en: "Tart" },
     desc: { ar: "تارت بعجينة مقرمشة وحشوة كريمية.", en: "A crisp pastry shell with a creamy filling." },
     art: { sweet: "tart" } },
-  { id: "basque-cheesecake", cat: "sweets", price: 5000, sizes: false, extras: [], badges: [], img: "",
+  { id: "basque-cheesecake", cat: "sweets", price: 5000, sizes: false, extras: [], badges: [], img: "images/san-sebastian.jpg",
     name: { ar: "سان سباستيان", en: "San Sebastián Cheesecake" },
     desc: { ar: "تشيز كيك بوجه محروق وقلب كريمي.", en: "Cheesecake with a burnt top and a creamy centre." },
     art: { sweet: "cheesecake" } },
-  { id: "blueberry-cheesecake", cat: "sweets", price: 5000, sizes: false, extras: [], badges: [], img: "",
+  { id: "blueberry-cheesecake", cat: "sweets", price: 5000, sizes: false, extras: [], badges: [], img: "images/blueberry-cheesecake.jpg",
     name: { ar: "بلوبيري چيزكيك", en: "Blueberry Cheesecake" },
     desc: { ar: "تشيز كيك كريمي تعلوه حبات البلوبيري.", en: "Creamy cheesecake topped with fresh blueberries." },
     art: { sweet: "cheesecake", style: "blueberry" } },
-  { id: "tiramisu", cat: "sweets", price: 4500, sizes: false, extras: [], badges: [], img: "",
+  { id: "tiramisu", cat: "sweets", price: 4500, sizes: false, extras: [], badges: [], img: "images/tiramisu.jpg",
     name: { ar: "تيراميسو", en: "Tiramisu" },
     desc: { ar: "بسكويت مشرّب بالقهوة وكريمة الماسكاربوني بطبقات، مرشوش بالكاكاو.", en: "Coffee-soaked biscuits layered with mascarpone cream, dusted with cocoa." },
     art: { sweet: "tiramisu" } },
-  { id: "classic-cookie-100", cat: "sweets", price: 4000, sizes: false, extras: [], badges: [], img: "",
+  { id: "classic-cookie-100", cat: "sweets", price: 4000, sizes: false, extras: [], badges: [], img: "images/classic-cookie-100.jpg",
     name: { ar: "كلاسك كوكيز ١٠٠ غم", en: "Classic Cookie 100 g" },
     desc: { ar: "كوكيز كلاسيكية برقائق الشوكولاتة البلجيكية، الحجم الكبير ١٠٠ غرام.", en: "Classic cookie with Belgian chocolate chips, the large 100 g size." },
     art: { sweet: "cookie" } },
-  { id: "classic-cookie-50", cat: "sweets", price: 2000, sizes: false, extras: [], badges: [], img: "",
+  { id: "classic-cookie-50", cat: "sweets", price: 2000, sizes: false, extras: [], badges: [], img: "images/classic-cookie-50.jpg",
     name: { ar: "كلاسك كوكيز ٥٠ غم", en: "Classic Cookie 50 g" },
     desc: { ar: "كوكيز كلاسيكية برقائق الشوكولاتة البلجيكية، الحجم الصغير ٥٠ غرام.", en: "Classic cookie with Belgian chocolate chips, the small 50 g size." },
     art: { sweet: "cookie", small: true } },
-  { id: "cocoa-cookie-50", cat: "sweets", price: 2500, sizes: false, extras: [], badges: [], img: "",
+  { id: "cocoa-cookie-50", cat: "sweets", price: 2500, sizes: false, extras: [], badges: [], img: "images/cocoa-cookie-50.jpg",
     name: { ar: "كوكيز بالكاكاو ٥٠ غم", en: "Cocoa Cookie 50 g" },
     desc: { ar: "كوكيز مضاف إليه الكاكاو الهولندي، برقائق الشوكولاتة البلجيكية، ٥٠ غرام.", en: "Cookie with added Dutch cocoa and Belgian chocolate chips, 50 g." },
     art: { sweet: "cookie", style: "cocoa", small: true } },
