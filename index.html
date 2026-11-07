@@ -401,12 +401,14 @@ a { color: inherit; }
 .ck i:nth-child(6) { left: 3.2em; top: 4.6em; transform: rotate(-50deg) scale(.9); }
 
 /* Sweet variants: blueberry cheesecake, cocoa cookie, smaller 50 g size */
-.sweet--blueberry .cc-top { background: radial-gradient(circle at 40% 40%, #9fb4ff 0 .1em, transparent .13em) 0 0 / .7em .5em, linear-gradient(170deg, #3b1d5e, #5a2d86 60%, #6b3a9a); }
-.sweet--blueberry .cc-front { background: radial-gradient(40% 20% at 40% 62%, rgba(255,255,255,.55), transparent 70%), linear-gradient(180deg, transparent 32.6%, #4a2370 32.6%, #6b3a9a 41%, #fbf3e3 43%, #f6ead2 82%, #c9955a 84%, #a87240 100%); }
-.sweet--blueberry .cc-side { background: linear-gradient(180deg, #4a2370 0 16%, #e9dcc2 19% 78%, #a87240 81%); }
+.sweet--blueberry .cc-top { background: linear-gradient(170deg, #f7ecd6, #efdcb8 70%, #e6cfa5); }
+.sweet--blueberry .cc-front { background: radial-gradient(40% 20% at 40% 62%, rgba(255,255,255,.55), transparent 70%), linear-gradient(180deg, transparent 32.6%, #6e2f4f 32.6%, #8a3d5f 36%, #fbf3e3 38%, #f6ead2 82%, #c9955a 84%, #a87240 100%); }
+.sweet--blueberry .cc-side { background: linear-gradient(180deg, #6e2f4f 0 8%, #e9dcc2 11% 78%, #a87240 81%); }
+.berry { position: absolute; z-index: 2; width: .78em; height: .78em; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #b9c6ff 0 12%, #4a4fa8 35%, #262a6a 80%); box-shadow: 0 .06em .1em rgba(0,0,0,.35); }
+.berry::after { content: ""; position: absolute; left: 50%; top: 4%; width: .22em; height: .14em; margin-left: -.11em; border-radius: 50%; background: #1a1c48; }
 .sweet--small { transform: scale(.78); transform-origin: 50% 100%; }
-.sweet--cocoa .ck { background: radial-gradient(circle at 30% 25%, rgba(170,120,90,.45), transparent 40%), radial-gradient(circle at 60% 60%, #6a3b22, #4f2918 70%, #351b0e); box-shadow: 0 .3em 0 #24110a; }
-.sweet--cocoa .ck i { background: linear-gradient(140deg, #3a1d0e, #160802 70%); box-shadow: inset .08em .08em 0 rgba(255,255,255,.2); }
+.sweet--cocoa .ck { background: radial-gradient(circle, rgba(90,45,20,.55) 0 .06em, transparent .08em) 0 0 / .45em .4em, radial-gradient(circle at 30% 25%, rgba(255,230,170,.4), transparent 40%), radial-gradient(circle at 60% 60%, #b97d3f, #9c6430 70%, #7a4a1f); }
+.sweet--cocoa .ck i { transform-origin: center; width: .8em; height: .62em; }
 .tiramisu { width: 7em; height: 4.6em; margin-bottom: .1em; }
 .tiramisu i { position: absolute; inset: 0; }
 .tm-top { clip-path: polygon(0 29.5%, 80% 29.5%, 100% 0, 20% 0); background: radial-gradient(circle, rgba(30,12,4,.55) 0 .05em, transparent .07em) 0 0 / .3em .28em, #6b3a1c; }
@@ -588,10 +590,14 @@ const ITEMS = [
     name: { ar: "لاتيه", en: "Latte" },
     desc: { ar: "إسبريسو مع حليب مبخّر وطبقة رغوة خفيفة.", en: "Espresso with steamed milk and a thin layer of foam." },
     art: { vessel: "cup", fill: 90, steam: true, layers: [["espresso", 2], ["latteMix", 1.4], ["milk", 5], ["foam", 1.2]] } },
-  { id: "mocha", cat: "hot", price: 4000, sizes: false, extras: [], badges: [], img: "",
-    name: { ar: "دارك / وايت موكا", en: "Dark / White Mocha" },
-    desc: { ar: "إسبريسو وحليب مبخّر مع شوكولاتة داكنة أو بيضاء، حسب اختيارك.", en: "Espresso and steamed milk with dark or white chocolate, your choice." },
+  { id: "dark-mocha", cat: "hot", price: 4000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "دارك موكا", en: "Dark Mocha" },
+    desc: { ar: "إسبريسو وحليب مبخّر مع شوكولاتة داكنة.", en: "Espresso and steamed milk with dark chocolate." },
     art: { vessel: "cup", fill: 88, steam: true, layers: [["chocolate", 2], ["espresso", 2.2], ["latteMix", 1.2], ["milk", 3.6], ["foam", 1]] } },
+  { id: "white-mocha", cat: "hot", price: 4000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "وايت موكا", en: "White Mocha" },
+    desc: { ar: "إسبريسو وحليب مبخّر مع شوكولاتة بيضاء.", en: "Espresso and steamed milk with white chocolate." },
+    art: { vessel: "cup", fill: 88, steam: true, layers: [["whiteChoc", 2], ["espresso", 2.2], ["latteMix", 1.2], ["milk", 3.6], ["foam", 1]] } },
   { id: "spanish-latte", cat: "hot", price: 5000, sizes: false, extras: [], badges: [], img: "",
     name: { ar: "سبانش لاتيه", en: "Spanish Latte" },
     desc: { ar: "حليب مكثّف محلّى وإسبريسو وحليب مبخّر.", en: "Sweet condensed milk, espresso and steamed milk." },
@@ -606,10 +612,14 @@ const ITEMS = [
     name: { ar: "آيس لاتيه", en: "Iced Latte" },
     desc: { ar: "إسبريسو يُسكب فوق الحليب البارد والثلج.", en: "Espresso poured over cold milk and ice." },
     art: { vessel: "glass", fill: 84, ice: true, straw: true, layers: [["milk", 5], ["latteMix", 1.2], ["espresso", 2.2]] } },
-  { id: "iced-mocha", cat: "iced", price: 4000, sizes: false, extras: [], badges: [], img: "",
-    name: { ar: "آيس دارك / وايت موكا", en: "Iced Dark / White Mocha" },
-    desc: { ar: "إسبريسو وحليب بارد مع شوكولاتة داكنة أو بيضاء، حسب اختيارك.", en: "Espresso and cold milk with dark or white chocolate, your choice." },
+  { id: "iced-dark-mocha", cat: "iced", price: 4000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "آيس دارك موكا", en: "Iced Dark Mocha" },
+    desc: { ar: "إسبريسو وحليب بارد مع شوكولاتة داكنة.", en: "Espresso and cold milk with dark chocolate." },
     art: { vessel: "glass", fill: 86, ice: true, straw: true, layers: [["chocolate", 2], ["milk", 3.6], ["latteMix", 1], ["espresso", 2]] } },
+  { id: "iced-white-mocha", cat: "iced", price: 4000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "آيس وايت موكا", en: "Iced White Mocha" },
+    desc: { ar: "إسبريسو وحليب بارد مع شوكولاتة بيضاء.", en: "Espresso and cold milk with white chocolate." },
+    art: { vessel: "glass", fill: 86, ice: true, straw: true, layers: [["whiteChoc", 2], ["milk", 3.6], ["latteMix", 1], ["espresso", 2]] } },
   { id: "iced-spanish-latte", cat: "iced", price: 5000, sizes: false, extras: [], badges: [], img: "",
     name: { ar: "آيس سبانش لاتيه", en: "Iced Spanish Latte" },
     desc: { ar: "حليب مكثّف وحليب بارد وإسبريسو، بطبقات واضحة.", en: "Condensed milk, cold milk and espresso in clear layers." },
@@ -622,11 +632,11 @@ const ITEMS = [
     art: { sweet: "tart" } },
   { id: "basque-cheesecake", cat: "sweets", price: 5000, sizes: false, extras: [], badges: [], img: "",
     name: { ar: "سان سباستيان", en: "San Sebastián Cheesecake" },
-    desc: { ar: "تشيز كيك باسكي بوجه محروق وقلب كريمي.", en: "Basque cheesecake with a burnt top and a creamy centre." },
+    desc: { ar: "تشيز كيك بوجه محروق وقلب كريمي.", en: "Cheesecake with a burnt top and a creamy centre." },
     art: { sweet: "cheesecake" } },
   { id: "blueberry-cheesecake", cat: "sweets", price: 5000, sizes: false, extras: [], badges: [], img: "",
     name: { ar: "بلوبيري چيزكيك", en: "Blueberry Cheesecake" },
-    desc: { ar: "تشيز كيك كريمي تعلوه صلصة البلوبيري.", en: "Creamy cheesecake topped with blueberry sauce." },
+    desc: { ar: "تشيز كيك كريمي تعلوه حبات البلوبيري.", en: "Creamy cheesecake topped with fresh blueberries." },
     art: { sweet: "cheesecake", style: "blueberry" } },
   { id: "tiramisu", cat: "sweets", price: 4500, sizes: false, extras: [], badges: [], img: "",
     name: { ar: "تيراميسو", en: "Tiramisu" },
@@ -642,7 +652,7 @@ const ITEMS = [
     art: { sweet: "cookie", small: true } },
   { id: "cocoa-cookie-50", cat: "sweets", price: 2500, sizes: false, extras: [], badges: [], img: "",
     name: { ar: "كوكيز بالكاكاو ٥٠ غم", en: "Cocoa Cookie 50 g" },
-    desc: { ar: "كوكيز بعجينة الكاكاو، ٥٠ غرام.", en: "Cookie made with cocoa dough, 50 g." },
+    desc: { ar: "كوكيز مضاف إليه الكاكاو الهولندي، برقائق الشوكولاتة البلجيكية، ٥٠ غرام.", en: "Cookie with added Dutch cocoa and Belgian chocolate chips, 50 g." },
     art: { sweet: "cookie", style: "cocoa", small: true } },
 ];
 
@@ -669,6 +679,7 @@ const LAYERS = {
   tea:          { color: "#962a0e" },
   sugar:        { color: "#f1e3c6" },
   chocolate:    { color: "#4f2715" },
+  whiteChoc:    { color: "#f3e6c9" },
   caramel:      { color: "#c27a2c" },
   frappe:       { color: "#c79b70", tex: "foam" },
   matcha:       { color: "#7f9f3f" },
@@ -801,10 +812,13 @@ function croissantLobes() {
   return lobes.map(([deg, w, h], i) => `<i style="width:${w}em;height:${h}em;margin:${-h / 2}em 0 0 ${-w / 2}em;transform:rotate(${deg}deg) translateY(-2.3em);z-index:${10 - Math.abs(i - 3)}"></i>`).join("");
 }
 
+const BERRIES = [[1.2, .25], [2.4, .35], [3.6, .2], [4.8, .3], [5.9, .18], [6.5, -.3], [3, -.25], [5.2, -.45]]
+  .map(([x, y]) => `<b class="berry" style="left:${x}em;top:${y}em"></b>`).join("");
+
 function sweetHTML(a) {
   const mod = (a.style ? " sweet--" + esc(a.style) : "") + (a.small ? " sweet--small" : "");
   const inner = {
-    cheesecake: `<span class="sweet cheesecake${mod}"><i class="cc-top"></i><i class="cc-side"></i><i class="cc-front"></i></span>`,
+    cheesecake: `<span class="sweet cheesecake${mod}"><i class="cc-top"></i><i class="cc-side"></i><i class="cc-front"></i>${a.style === "blueberry" ? BERRIES : ""}</span>`,
     tiramisu:   `<span class="sweet tiramisu${mod}"><i class="tm-top"></i><i class="tm-side"></i><i class="tm-front"></i></span>`,
     tart:       `<span class="sweet tart${mod}"><i class="tt-crust"></i><i class="tt-fill"></i><b></b><b></b><b></b></span>`,
     brownie:    '<span class="sweet brownie"><i class="bw-top"></i><i class="bw-side"></i><i class="bw-front"></i></span>',
