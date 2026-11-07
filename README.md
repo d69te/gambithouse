@@ -4,7 +4,7 @@ A one-file, display-only menu for a café (Arabic + English). Customers scan a Q
 
 Everything lives in **`index.html`**, plus the logo images **`logo.png`** (gold version for the header) and **`logo-original.png`** (browser tab icon). Upload all three. There are no libraries and no build step. The only outside resource is Google Fonts.
 
-The café details in the file are **sample content** («كامبت هاوس / Gambit House», Karrada, Baghdad). Replace them before going live.
+The café details in the file are **sample content** («غامبيت هاوس / Gambit House», Karrada, Baghdad). Replace them before going live.
 
 ---
 
@@ -19,7 +19,7 @@ Prices are whole dinars **without commas**: `5000`, not `5,000`. The page adds t
 ### CAFE: name, tagline, Instagram
 ```js
 const CAFE = {
-  name:      { ar: "كامبت هاوس", en: "Gambit House" },
+  name:      { ar: "غامبيت هاوس", en: "Gambit House" },
   tagline:   { ar: "…", en: "…" },
   instagram: "gambithouse_iq",     // without the @
   ...
