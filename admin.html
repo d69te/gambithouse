@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#130c08">
+<title>لوحة الأسعار — Gambit House</title>
+<link rel="icon" href="logo-original.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@500;600;700&display=swap">
+<style>
+:root {
+  --bg: #130c08; --surface: #1d130d; --surface-2: #261a12;
+  --text: #f4e9d8; --muted: #b8a48a;
+  --gold: #e8ad3a; --gold-hi: #f7d27a;
+  --line: rgba(232, 173, 58, .16); --line-2: rgba(232, 173, 58, .34);
+  --ok: #7fc8b4; --bad: #e98a6c;
+  --font-head: "Reem Kufi", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--text); font: 400 16px/1.7 var(--font-body); }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 3px; }
+.wrap { max-width: 560px; margin: 0 auto; padding: 24px 16px 120px; }
+.brand { display: flex; align-items: center; gap: 12px; margin-block-end: 24px; }
+.brand img { width: 48px; height: 48px; object-fit: contain; }
+.brand h1 { margin: 0; font: 700 1.3rem/1.3 var(--font-head); color: var(--gold-hi); }
+.brand p { margin: 0; font-size: .85rem; color: var(--muted); }
+
+/* PIN screen */
+.lock { margin-block-start: 12vh; text-align: center; }
+.lock h2 { margin: 0 0 8px; font: 600 1.2rem var(--font-head); }
+.lock p { margin: 0 0 24px; color: var(--muted); }
+.pin { display: block; width: 100%; max-width: 240px; margin: 0 auto 16px; padding: 12px 16px; border: 1px solid var(--line-2); border-radius: 14px; background: var(--surface); text-align: center; font-size: 1.6rem; letter-spacing: .4em; direction: ltr; }
+.pin:focus { border-color: var(--gold); outline: none; }
+.msg { min-height: 1.7em; margin: 8px 0 0; font-size: .9rem; color: var(--bad); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 24px; border: 0; border-radius: 14px; background: var(--gold); color: #1b1006; font-weight: 600; cursor: pointer; }
+.btn:disabled { opacity: .55; cursor: default; }
+.btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); min-height: 40px; padding: 0 16px; font-size: .85rem; }
+
+/* list */
+.sec { margin-block: 24px 8px; display: flex; align-items: center; gap: 12px; }
+.sec h2 { margin: 0; font: 600 1.05rem var(--font-head); color: var(--gold); }
+.sec::after { content: ""; flex: 1; border-top: 1px dashed var(--line-2); }
+.row { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 8px 12px; padding: 12px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); margin-block-end: 8px; }
+.row.off { background: transparent; }
+.row.off .nm { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line-2); }
+.row.dirty { border-color: var(--line-2); }
+.nm { font-weight: 500; line-height: 1.4; }
+.nm small { display: block; color: var(--muted); font-size: .78rem; font-weight: 400; }
+.price { display: flex; align-items: center; gap: 4px; }
+.price input { width: 92px; padding: 8px 8px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--surface-2); text-align: center; direction: ltr; font-variant-numeric: tabular-nums; }
+.price input:focus { border-color: var(--gold); outline: none; }
+.price input.err { border-color: var(--bad); }
+.price span { font-size: .78rem; color: var(--muted); }
+/* availability switch */
+.sw { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; font-size: .7rem; color: var(--muted); min-width: 52px; }
+.sw input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.sw i { width: 44px; height: 26px; border-radius: 99px; background: #3a2c22; position: relative; transition: background .15s; }
+.sw i::after { content: ""; position: absolute; top: 3px; inset-inline-start: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--muted); transition: inset-inline-start .15s, background .15s; }
+.sw input:checked + i { background: rgba(127, 200, 180, .35); }
+.sw input:checked + i::after { inset-inline-start: 21px; background: var(--ok); }
+.sw input:focus-visible + i { outline: 2px solid var(--gold-hi); outline-offset: 2px; }
+
+.bar { position: fixed; inset-inline: 0; bottom: 0; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: rgba(19, 12, 8, .94); border-top: 1px solid var(--line); backdrop-filter: blur(8px); }
+.bar-in { max-width: 560px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+.bar .btn { flex: 1; }
+.status { font-size: .9rem; color: var(--muted); min-width: 96px; }
+.status.ok { color: var(--ok); }
+.status.bad { color: var(--bad); }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.note { margin: 0; color: var(--muted); font-size: .85rem; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="brand">
+    <img src="logo.png" alt="">
+    <div><h1>Gambit House</h1><p>لوحة الأسعار والتوفر</p></div>
+  </header>
+
+  <section id="lock" class="lock">
+    <h2>أدخل الرمز</h2>
+    <p>الرمز السري للوحة (٦ أرقام)</p>
+    <form id="pin-form">
+      <input id="pin" class="pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="6" aria-label="الرمز السري" required>
+      <button class="btn" type="submit" id="pin-btn">دخول</button>
+      <p class="msg" id="pin-msg" role="alert"></p>
+    </form>
+  </section>
+
+  <section id="panel" hidden>
+    <div class="top">
+      <p class="note">غيّر السعر أو طفّي «متوفر»، وبعدين اضغط حفظ.</p>
+      <button class="btn btn-ghost" type="button" id="logout">خروج</button>
+    </div>
+    <div id="list"></div>
+  </section>
+</main>
+
+<div class="bar" id="bar" hidden>
+  <div class="bar-in">
+    <button class="btn" type="button" id="save" disabled>حفظ</button>
+    <span class="status" id="status" role="status" aria-live="polite"></span>
+  </div>
+</div>
+
+<script>
+/* Item ids, names and baked-in prices = the same as ITEMS in index.html. Keep both in sync
+   (and the key list in tools/menu-api/worker.js) when Ali adds or removes an item. */
+const API = "https://jk-menu-api.d69te.workers.dev/m/gambit-house";
+const SECTIONS = [
+  ["مشروبات حارّة", [
+    ["espresso-single", "سنغل شوت إسبريسو", 1500], ["espresso-double", "دبل شوت إسبريسو", 2500],
+    ["lungo", "إسبريسو لونگو", 2500], ["americano", "أميركانو", 2500], ["cortado", "كورتادو", 3000],
+    ["macchiato", "ماكياتو", 3000], ["cappuccino", "كابتشينو", 4000], ["latte", "لاتيه", 4000],
+    ["dark-mocha", "دارك موكا", 4000], ["white-mocha", "وايت موكا", 4000], ["spanish-latte", "سبانش لاتيه", 5000]]],
+  ["مشروبات باردة", [
+    ["iced-americano", "آيس أميركانو", 2500], ["iced-latte", "آيس لاتيه", 4000], ["iced-dark-mocha", "آيس دارك موكا", 4000],
+    ["iced-white-mocha", "آيس وايت موكا", 4000], ["iced-spanish-latte", "آيس سبانش لاتيه", 5000]]],
+  ["حلويات", [
+    ["tart", "تارت", 4000], ["basque-cheesecake", "سان سباستيان", 5000], ["blueberry-cheesecake", "بلوبيري چيزكيك", 5000],
+    ["tiramisu", "تيراميسو", 4500], ["classic-cookie-100", "كلاسك كوكيز ١٠٠ غم", 4000],
+    ["classic-cookie-50", "كلاسك كوكيز ٥٠ غم", 2000], ["cocoa-cookie-50", "كوكيز بالكاكاو ٥٠ غم", 2500]]]
+];
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const toNum = (v) => { const d = String(v).replace(/[٠-٩]/g, (c) => "٠١٢٣٤٥٦٧٨٩".indexOf(c)).replace(/[^\d]/g, ""); return d ? parseInt(d, 10) : NaN; };
+const okPrice = (n) => Number.isInteger(n) && n > 0 && n <= 500000 && n % 250 === 0;
+let PIN = "", saved = { prices: {}, off: [] };
+try { PIN = sessionStorage.getItem("gh-pin") || ""; } catch (e) {}
+
+async function post(body) {
+  const r = await fetch(API, { method: "POST", headers: { "Authorization": "Bearer " + PIN, "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  let d = {}; try { d = await r.json(); } catch (e) {}
+  return { status: r.status, d };
+}
+
+function render() {
+  const off = new Set(saved.off || []);
+  $("#list").innerHTML = SECTIONS.map(([title, items]) => `<div class="sec"><h2>${esc(title)}</h2></div>` + items.map(([id, name, base]) => {
+    const p = Number.isInteger(saved.prices[id]) ? saved.prices[id] : base;
+    const on = !off.has(id);
+    return `<div class="row${on ? "" : " off"}" data-id="${id}" data-p="${p}" data-on="${on}">
+      <div class="nm">${esc(name)}${p !== base ? `<small>الأصلي ${base.toLocaleString("en")}</small>` : ""}</div>
+      <label class="price"><input type="text" inputmode="numeric" value="${p.toLocaleString("en")}" aria-label="سعر ${esc(name)}"><span>د.ع</span></label>
+      <label class="sw"><input type="checkbox" ${on ? "checked" : ""} aria-label="${esc(name)} متوفر"><i></i><span>متوفر</span></label>
+    </div>`;
+  }).join("")).join("");
+}
+
+function collect() {
+  const prices = {}, off = []; let bad = false, dirty = false;
+  document.querySelectorAll(".row").forEach((row) => {
+    const id = row.dataset.id, inp = row.querySelector(".price input"), on = row.querySelector(".sw input").checked;
+    const n = toNum(inp.value), err = !okPrice(n);
+    inp.classList.toggle("err", err); bad = bad || err;
+    const rowDirty = (!err && n !== +row.dataset.p) || String(on) !== row.dataset.on;
+    row.classList.toggle("dirty", rowDirty); row.classList.toggle("off", !on);
+    dirty = dirty || rowDirty;
+    if (!err) prices[id] = n;
+    if (!on) off.push(id);
+  });
+  return { prices, off, bad, dirty };
+}
+function refresh() {
+  const c = collect();
+  $("#save").disabled = !c.dirty || c.bad;
+  setStatus(c.bad ? "سعر غلط" : (c.dirty ? "" : $("#status").textContent), c.bad ? "bad" : "");
+}
+function setStatus(t, cls) { const s = $("#status"); s.textContent = t; s.className = "status" + (cls ? " " + cls : ""); }
+
+async function openPanel() {
+  $("#lock").hidden = true; $("#panel").hidden = false; $("#bar").hidden = false;
+  try { const r = await fetch(API, { cache: "no-store" }); if (r.ok) saved = await r.json(); } catch (e) { setStatus("ماكو اتصال", "bad"); }
+  saved.prices = saved.prices || {}; saved.off = saved.off || [];
+  render(); refresh();
+}
+function lockMsg(d, status) {
+  if (status === 429) return "محاولات هواية، جرّب بعد ربع ساعة";
+  if (status === 401) return d.left ? `الرمز غلط (باقي ${d.left} محاولات)` : "الرمز غلط";
+  return "ماكو اتصال، جرّب مرة ثانية";
+}
+
+$("#pin-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  PIN = toNum($("#pin").value).toString();
+  $("#pin-btn").disabled = true; $("#pin-msg").textContent = "";
+  try {
+    const { status, d } = await post({ check: true });
+    if (status === 200 && d.ok) { try { sessionStorage.setItem("gh-pin", PIN); } catch (e) {} openPanel(); }
+    else $("#pin-msg").textContent = lockMsg(d, status);
+  } catch (err) { $("#pin-msg").textContent = lockMsg({}, 0); }
+  $("#pin-btn").disabled = false;
+});
+$("#list").addEventListener("input", refresh);
+$("#list").addEventListener("change", refresh);
+$("#save").addEventListener("click", async () => {
+  const c = collect(); if (c.bad) return;
+  $("#save").disabled = true; setStatus("جاري الحفظ…");
+  try {
+    const { status, d } = await post({ prices: c.prices, off: c.off });
+    if (status === 200 && d.ok) { saved = d; render(); setStatus("انحفظ ✓", "ok"); refresh(); }
+    else if (status === 401 || status === 429) { setStatus(lockMsg(d, status), "bad"); logout(); $("#pin-msg").textContent = lockMsg(d, status); }
+    else { setStatus("ما انحفظ، جرّب مرة ثانية", "bad"); $("#save").disabled = false; }
+  } catch (e) { setStatus("ماكو اتصال", "bad"); $("#save").disabled = false; }
+});
+function logout() {
+  PIN = ""; try { sessionStorage.removeItem("gh-pin"); } catch (e) {}
+  $("#panel").hidden = true; $("#bar").hidden = true; $("#lock").hidden = false; $("#pin").value = "";
+}
+$("#logout").addEventListener("click", logout);
+if (PIN) openPanel();
+</script>
+</body>
+</html>

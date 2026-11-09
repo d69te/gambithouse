@@ -185,6 +185,8 @@ a { color: inherit; }
 .cat-blurb { margin: 2px 0 14px; font-size: .9rem; color: var(--muted); }
 .items { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 @media (min-width: 720px) { .items { grid-template-columns: 1fr 1fr; gap: 14px; } }
+.item-li.off .thumb, .item-li.off .item-name, .item-li.off .item-desc { opacity: .4; filter: grayscale(1); }
+.sold { font-family: var(--font-body); font-weight: 500; font-size: .82rem; color: var(--muted); }
 .item {
   display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; align-items: center;
   width: 100%; height: 100%; padding: 10px; padding-inline-end: 14px; text-align: start;
@@ -713,6 +715,7 @@ const TEXT = {
     size: "الحجم", extras: "الإضافات", total: "السعر", close: "إغلاق",
     note: "القائمة للعرض فقط. اطلب من الكاشير، وصحّة وعافية.",
     prices: "الأسعار بالدينار العراقي وتشمل الخدمة",
+    soldOut: "غير متوفر",
   },
   en: {
     langLabel: "عربي", langAria: "عربي: Show the menu in Arabic",
@@ -725,6 +728,7 @@ const TEXT = {
     size: "Size", extras: "Add-ons", total: "Price", close: "Close",
     note: "Display menu only. Please order at the counter.",
     prices: "Prices in Iraqi dinar, service included",
+    soldOut: "Sold out",
   },
 };
 
@@ -856,7 +860,7 @@ function badgesHTML(it) {
   const b = (it.badges || []).filter((k) => BADGES[k]);
   return b.length ? `<span class="badges">${b.map((k) => `<span class="badge badge--${k}">${esc(L(BADGES[k]))}</span>`).join("")}</span>` : "";
 }
-const priceHTML = (it) => `${it.sizes ? `<small>${esc(T("from"))}</small>` : ""}<span>${fmtPrice(it.price)}</span>`;
+const priceHTML = (it) => it.off ? `<span class="sold">${esc(T("soldOut"))}</span>` : `${it.sizes ? `<small>${esc(T("from"))}</small>` : ""}<span>${fmtPrice(it.price)}</span>`;
 
 function applyStaticText() {
   $$("[data-t]").forEach((el) => { el.textContent = T(el.dataset.t); });
@@ -888,7 +892,7 @@ function renderCatChips() {
 
 /* Today's pick: a different item each day, cycling through the whole menu. */
 function todaysPick() {
-  const pool = visibleItems().filter((it) => it.pick !== false);
+  const pool = visibleItems().filter((it) => it.pick !== false && !it.off);
   if (!pool.length) return null;
   const d = new Date();
   const day = Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5);
@@ -913,7 +917,7 @@ function renderPick() {
 }
 
 function cardHTML(it) {
-  return `<li class="item-li" data-id="${esc(it.id)}">
+  return `<li class="item-li${it.off ? " off" : ""}" data-id="${esc(it.id)}">
     <button class="item" type="button" data-open="${esc(it.id)}">
       <span class="thumb">${artHTML(it)}</span>
       <span class="item-body">
@@ -1089,7 +1093,7 @@ function renderSheet() {
       <h2 class="sheet-title" id="sheet-title">${esc(L(it.name))}</h2>
       <p class="sheet-desc">${esc(L(it.desc))}</p>
       ${sizes}${extrasHTML}
-      <div class="total"><span>${esc(T("total"))}</span><output id="sheet-total" aria-live="polite">${fmtPrice(sheetTotal())}</output></div>
+      <div class="total"><span>${esc(T("total"))}</span><output id="sheet-total" aria-live="polite">${sheet.item.off ? esc(T("soldOut")) : fmtPrice(sheetTotal())}</output></div>
       <p class="sheet-note">${esc(T("note"))}</p>
     </div>`;
 }
@@ -1220,6 +1224,28 @@ window.addEventListener("resize", () => { setBarHeight(); spy(); });
 $("#empty-art").innerHTML = drinkHTML({ vessel: "demitasse", fill: 0, layers: [] });
 buildSearchIndex();
 setLang(loadLang(), false);
+
+/* Live prices + «غير متوفر» from the owner panel (admin.html). If the API is slow or down,
+   the prices written in ITEMS above stay. Shape: {prices:{id:number}, off:[ids], updated}. */
+const MENU_API = "https://jk-menu-api.d69te.workers.dev/m/gambit-house";
+(async () => {
+  try {
+    const ctl = new AbortController();
+    const t = setTimeout(() => ctl.abort(), 2000);
+    const r = await fetch(MENU_API, { signal: ctl.signal, cache: "no-cache" });
+    clearTimeout(t);
+    if (!r.ok) return;
+    const d = await r.json();
+    const off = new Set(Array.isArray(d.off) ? d.off : []);
+    let changed = false;
+    ITEMS.forEach((it) => {
+      const p = d.prices && d.prices[it.id];
+      if (Number.isInteger(p) && p >= 0 && p !== it.price) { it.price = p; changed = true; }
+      if (off.has(it.id) !== !!it.off) { it.off = off.has(it.id); changed = true; }
+    });
+    if (changed) renderAll();
+  } catch (e) { /* keep the baked-in prices */ }
+})();
 </script>
 </body>
 </html>
