@@ -120,14 +120,16 @@ const SECTIONS = [
     ["espresso-single", "سنغل شوت إسبريسو", 1500], ["espresso-double", "دبل شوت إسبريسو", 2500],
     ["lungo", "إسبريسو لونگو", 2500], ["americano", "أميركانو", 2500], ["cortado", "كورتادو", 3000],
     ["macchiato", "ماكياتو", 3000], ["cappuccino", "كابتشينو", 4000], ["latte", "لاتيه", 4000],
-    ["dark-mocha", "دارك موكا", 4000], ["white-mocha", "وايت موكا", 4000], ["spanish-latte", "سبانش لاتيه", 5000]]],
+    ["dark-mocha", "دارك موكا", 4000], ["white-mocha", "وايت موكا", 4000], ["spanish-latte", "سبانش لاتيه", 5000],
+    ["french-coffee", "قهوة فرنسية", 3000], ["turkish-coffee", "قهوة تركية", 2000], ["karak", "چاي كرك", 2000]]],
   ["مشروبات باردة", [
     ["iced-americano", "آيس أميركانو", 2500], ["iced-latte", "آيس لاتيه", 4000], ["iced-dark-mocha", "آيس دارك موكا", 4000],
     ["iced-white-mocha", "آيس وايت موكا", 4000], ["iced-spanish-latte", "آيس سبانش لاتيه", 5000]]],
   ["حلويات", [
     ["tart", "تارت", 4000], ["basque-cheesecake", "سان سباستيان", 5000], ["blueberry-cheesecake", "بلوبيري چيزكيك", 5000],
     ["tiramisu", "تيراميسو", 4500], ["classic-cookie-100", "كلاسك كوكيز ١٠٠ غم", 4000],
-    ["classic-cookie-50", "كلاسك كوكيز ٥٠ غم", 2000], ["cocoa-cookie-50", "كوكيز بالكاكاو ٥٠ غم", 2500]]]
+    ["classic-cookie-50", "كلاسك كوكيز ٥٠ غم", 2000], ["cocoa-cookie-50", "كوكيز بالكاكاو ٥٠ غم", 2500],
+    ["brownies", "براونيز", null]]]
 ];
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -145,11 +147,11 @@ async function post(body) {
 function render() {
   const off = new Set(saved.off || []);
   $("#list").innerHTML = SECTIONS.map(([title, items]) => `<div class="sec"><h2>${esc(title)}</h2></div>` + items.map(([id, name, base]) => {
-    const p = Number.isInteger(saved.prices[id]) ? saved.prices[id] : base;
+    const p = Number.isInteger(saved.prices[id]) ? saved.prices[id] : base; // base null = no price yet
     const on = !off.has(id);
     return `<div class="row${on ? "" : " off"}" data-id="${id}" data-p="${p}" data-on="${on}">
-      <div class="nm">${esc(name)}${p !== base ? `<small>الأصلي ${base.toLocaleString("en")}</small>` : ""}</div>
-      <label class="price"><input type="text" inputmode="numeric" value="${p.toLocaleString("en")}" aria-label="سعر ${esc(name)}"><span>د.ع</span></label>
+      <div class="nm">${esc(name)}${p == null ? `<small>بدون سعر، اكتب السعر</small>` : base != null && p !== base ? `<small>الأصلي ${base.toLocaleString("en")}</small>` : ""}</div>
+      <label class="price"><input type="text" inputmode="numeric" value="${p == null ? "" : p.toLocaleString("en")}" placeholder="—" aria-label="سعر ${esc(name)}"><span>د.ع</span></label>
       <label class="sw"><input type="checkbox" ${on ? "checked" : ""} aria-label="${esc(name)} متوفر"><i></i><span>متوفر</span></label>
     </div>`;
   }).join("")).join("");
@@ -159,12 +161,12 @@ function collect() {
   const prices = {}, off = []; let bad = false, dirty = false;
   document.querySelectorAll(".row").forEach((row) => {
     const id = row.dataset.id, inp = row.querySelector(".price input"), on = row.querySelector(".sw input").checked;
-    const n = toNum(inp.value), err = !okPrice(n);
+    const n = toNum(inp.value), empty = isNaN(n) && row.dataset.p === "null", err = !empty && !okPrice(n);
     inp.classList.toggle("err", err); bad = bad || err;
-    const rowDirty = (!err && n !== +row.dataset.p) || String(on) !== row.dataset.on;
+    const rowDirty = (!err && !empty && n !== +row.dataset.p) || String(on) !== row.dataset.on;
     row.classList.toggle("dirty", rowDirty); row.classList.toggle("off", !on);
     dirty = dirty || rowDirty;
-    if (!err) prices[id] = n;
+    if (!err && !empty) prices[id] = n;
     if (!on) off.push(id);
   });
   return { prices, off, bad, dirty };
