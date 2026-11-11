@@ -419,6 +419,7 @@ a { color: inherit; }
 .fruit--passion i:nth-child(1) { left: .2em; top: .2em; width: 2.2em; height: 2.2em; border-radius: 50%; background: radial-gradient(circle, #3a1a0a 0 .07em, transparent .1em) 0 0 / .42em .4em, radial-gradient(circle, #ffc93a 0 52%, #f3a21b 62%, #f6e6c8 64% 72%, #6b2d5c 74%, #4a1d40 100%); }
 
 /* Frappé: the cream breathes */
+.whip.mo { background: linear-gradient(180deg, #fffaf1, #f3e6d0); }
 .whip.mo { transform-origin: 50% 100%; animation: whip 3.2s ease-in-out infinite; }
 @keyframes whip { 0%, 100% { transform: scale(1, 1); } 50% { transform: translateY(-.08em) scale(1.03, 1.08); } }
 
@@ -426,17 +427,17 @@ a { color: inherit; }
 .icecream { width: 7.6em; height: 8em; }
 .icecream i, .icecream > span { position: absolute; }
 .ic-wafer { left: 4.6em; bottom: 3.2em; width: .8em; height: 3.6em; border-radius: .2em; transform: rotate(18deg); background: repeating-linear-gradient(0deg, #e8b46a 0 .3em, #c98d45 .3em .38em); box-shadow: inset -.1em 0 0 rgba(0,0,0,.15); }
-.ic-scoops { left: .6em; right: .6em; bottom: 1.9em; height: 4.8em; transform-origin: 50% 100%; animation: scoop 3.6s ease-in-out infinite; }
+.ic-scoops { left: .6em; right: .6em; bottom: .1em; height: 4.8em; }
 @keyframes scoop { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.025, .98); } }
 .ic-s { width: 3.1em; height: 2.9em; border-radius: 50% 50% 46% 46%; box-shadow: inset -.3em -.25em .4em rgba(0,0,0,.18), inset .25em .2em .3em rgba(255,255,255,.35); }
-.ic-s1 { left: 0; bottom: 0; background: radial-gradient(circle, #e9d8b0 0 .05em, transparent .07em) 0 0 / .5em .45em, #f7ecd2; }
-.ic-s2 { right: 0; bottom: 0; background: radial-gradient(circle, #3a1a0a 0 .06em, transparent .08em) .2em 0 / .55em .5em, #7a4224; }
-.ic-s3 { left: 1.6em; bottom: 1.75em; width: 3em; height: 2.8em; background: radial-gradient(circle, #c23a55 0 .06em, transparent .08em) 0 0 / .5em .45em, #f3a9b8; }
+.ic-s1 { left: 0; bottom: 0; background: #fbf5ea; }
+.ic-s2 { right: 0; bottom: 0; background: #fbf5ea; }
+.ic-s3 { left: 1.6em; bottom: 1.75em; width: 3em; height: 2.8em; background: #fffaf2; }
 .ic-sauce { left: 1.55em; bottom: 3.55em; width: 3.1em; height: 1.1em; border-radius: 50% 50% 40% 40% / 90% 90% 10% 10%; background: #5a2a12; clip-path: polygon(0 0, 100% 0, 100% 45%, 88% 100%, 78% 45%, 60% 45%, 48% 85%, 36% 45%, 18% 45%, 8% 75%, 0 45%); }
-.ic-cherry { left: 3.05em; bottom: 4.45em; width: 1em; height: 1em; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ff9a9a 0 .1em, transparent .25em), radial-gradient(circle, #e0283c, #9e0f22); animation: cherry 3.6s ease-in-out infinite; }
+.ic-cherry { left: 3.05em; bottom: 4.4em; width: 1em; height: 1em; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ff9a9a 0 .1em, transparent .25em), radial-gradient(circle, #e0283c, #9e0f22); animation: cherry 3.6s ease-in-out infinite; }
 .ic-cherry::before { content: ""; position: absolute; left: .5em; bottom: .85em; width: .5em; height: .9em; border-top: .09em solid #5a7a2a; border-left: .09em solid #5a7a2a; border-radius: 100% 0 0 0; }
 @keyframes cherry { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-.12em); } }
-.ic-drip { left: 1em; bottom: 1.25em; width: .42em; height: .4em; border-radius: 0 0 .25em .25em; background: #f7ecd2; transform-origin: 50% 0; animation: drip 4s ease-in infinite; }
+.ic-drip { left: 1.5em; bottom: -.2em; width: .42em; height: .4em; border-radius: 0 0 .25em .25em; background: #fbf5ea; transform-origin: 50% 0; animation: drip 4s ease-in infinite; }
 @keyframes drip { 0%, 15% { transform: scaleY(1); opacity: 1; } 75% { transform: scaleY(2.8); opacity: 1; } 90%, 100% { transform: scaleY(2.8); opacity: 0; } }
 .ic-bowl { left: .5em; right: .5em; bottom: .7em; height: 1.9em; border-radius: .15em .15em 3.2em 3.2em / .15em .15em 1.9em 1.9em; background: linear-gradient(90deg, #1b5f5b, #3aa59d 28%, #2c8c86 55%, #185551); box-shadow: inset 0 .16em 0 var(--gold-hi); }
 .ic-stem { left: 3.35em; bottom: 0; width: .9em; height: .9em; background: linear-gradient(90deg, #a8721c, #ffe2a0 45%, #b07a22); clip-path: polygon(25% 0, 75% 0, 100% 100%, 0 100%); }
@@ -754,21 +755,21 @@ const ITEMS = [
   { id: "mocha-frappe", cat: "frappe", price: 6000, sizes: false, extras: [], badges: [], img: "",
     name: { ar: "موكا فرابيه", en: "Mocha Frappé" },
     desc: { ar: "قهوة وشوكولاتة مخفوقة مع الثلج وكريمة.", en: "Coffee and chocolate blended with ice, topped with cream." },
-    art: { vessel: "glass", fill: 86, straw: true, whip: "cocoa", layers: [["chocolate", 1.2], ["frappe", 6]] } },
+    art: { vessel: "glass", fill: 86, straw: true, whip: "plain", layers: [["chocolate", 1.2], ["frappeSmooth", 6]] } },
   { id: "caramel-frappe", cat: "frappe", price: 6000, sizes: false, extras: [], badges: [], img: "",
     name: { ar: "كراميل فرابيه", en: "Caramel Frappé" },
     desc: { ar: "قهوة وكراميل مخفوقة مع الثلج وكريمة.", en: "Coffee and caramel blended with ice, topped with cream." },
-    art: { vessel: "glass", fill: 86, straw: true, whip: "caramel", layers: [["caramel", 1.2], ["frappe", 6]] } },
+    art: { vessel: "glass", fill: 86, straw: true, whip: "caramel", layers: [["caramel", 1.2], ["frappeSmooth", 6]] } },
   { id: "vanilla-frappe", cat: "frappe", price: 6000, sizes: false, extras: [], badges: [], img: "",
     name: { ar: "فانيلة فرابيه", en: "Vanilla Frappé" },
     desc: { ar: "قهوة وفانيلا مخفوقة مع الثلج وكريمة.", en: "Coffee and vanilla blended with ice, topped with cream." },
-    art: { vessel: "glass", fill: 86, straw: true, whip: "plain", layers: [["whiteChoc", 1.2], ["frappe", 6]] } },
+    art: { vessel: "glass", fill: 86, straw: true, whip: "plain", layers: [["whiteChoc", 1.2], ["frappeSmooth", 6]] } },
 
   /* ---------- Mojito ---------- */
   { id: "mojito", cat: "mojito", price: 4000, sizes: false, extras: [], badges: [], img: "",
     name: { ar: "موهيتو", en: "Mojito" },
     desc: { ar: "ليمون ونعناع وصودا فوق الثلج.", en: "Lime, mint and soda over ice." },
-    art: { vessel: "glass", fill: 86, ice: true, straw: true, layers: [["lemonmint", 2.5], ["soda", 5]] } },
+    art: { vessel: "glass", fill: 86, ice: true, straw: true, layers: [["mintSmooth", 2.5], ["sodaSmooth", 5]] } },
 
   /* ---------- Sweets ---------- */
   { id: "tart", cat: "sweets", price: 4000, sizes: false, extras: [], badges: [], img: "images/tart.jpg",
@@ -851,6 +852,9 @@ const LAYERS = {
   passion:      { color: "#f1a51d", tex: "seeds" },
   soda:         { color: "#f3d98f", tex: "fizz" },
   passionBlend: { color: "#f3a722", tex: "blend" },
+  frappeSmooth: { color: "#c79b70" },
+  mintSmooth:   { color: "#cfe08a" },
+  sodaSmooth:   { color: "#f3e7b5" },
   mango:        { color: "#f6a821", tex: "blend" },
   blueberry:    { color: "#6a4592", tex: "blend" },
   strawberry:   { color: "#e0566f", tex: "blend" },
@@ -996,7 +1000,7 @@ function sweetHTML(a) {
     brownie:    '<span class="sweet brownie"><i class="bw-top"></i><i class="bw-side"></i><i class="bw-front"></i></span>',
     kleicha:    `<span class="sweet kleicha">${kleichaArcs()}</span>`,
     croissant:  `<span class="sweet croissant">${croissantLobes()}</span>`,
-    icecream:   '<span class="sweet icecream"><i class="ic-wafer"></i><i class="ic-stem"></i><i class="ic-bowl"></i><span class="ic-scoops mo"><i class="ic-s ic-s1"></i><i class="ic-s ic-s2"></i><i class="ic-s ic-s3"></i><i class="ic-sauce"></i><i class="ic-cherry mo"></i></span><i class="ic-drip mo"></i></span>',
+    icecream:   '<span class="sweet icecream"><span class="ic-scoops"><i class="ic-s ic-s1"></i><i class="ic-s ic-s2"></i><i class="ic-s ic-s3"></i></span></span>',
     cookie:     `<span class="sweet cookie${mod}"><span class="ck"><i></i><i></i><i></i><i></i><i></i><i></i></span></span>`,
   }[a.sweet] || "";
   return `<span class="art art--sweet" aria-hidden="true">${inner}<span class="plate"></span></span>`;
