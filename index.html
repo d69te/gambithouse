@@ -391,6 +391,56 @@ a { color: inherit; }
 @keyframes steam  { 0% { opacity: 0; transform: translate(0, .8em) scale(.6, .5); } 30% { opacity: .85; } 100% { opacity: 0; transform: translate(.5em, -2.2em) scale(1.3, 1.25); } }
 @keyframes steam2 { 0% { opacity: 0; transform: translate(0, .8em) scale(.6, .5); } 30% { opacity: .85; } 100% { opacity: 0; transform: translate(-.5em, -2.5em) scale(1.3, 1.3); } }
 
+/* Motion: anything with .mo animates only while on screen (thumb in view, pick, sheet) */
+.mo { animation-play-state: paused !important; }
+.in-view .mo, .stage .mo, .pick-stage .mo { animation-play-state: running !important; }
+
+/* Smoothie jar */
+.art--jar .vessel { width: 5.8em; height: 7.6em; }
+.art--jar .body { border-radius: .5em .5em 1.7em 1.7em / .5em .5em 1.3em 1.3em; background: linear-gradient(90deg, rgba(255,255,255,.34), rgba(255,255,255,.1) 20%, rgba(255,255,255,.05) 62%, rgba(255,255,255,.26)); box-shadow: inset 0 0 0 .08em rgba(255,255,255,.3); }
+.art--jar .body::before { content: ""; position: absolute; z-index: 4; left: -.1em; right: -.1em; top: 0; height: .55em; border-radius: .3em; background: linear-gradient(180deg, rgba(255,255,255,.45), rgba(255,255,255,.12)); box-shadow: 0 .14em 0 rgba(255,255,255,.18); }
+.art--jar .body::after { content: ""; position: absolute; z-index: 4; top: 14%; bottom: 16%; left: 14%; width: .34em; border-radius: 1em; background: linear-gradient(rgba(255,255,255,.6), rgba(255,255,255,.05)); }
+.art--jar .inner { left: .26em; right: .26em; top: .3em; bottom: .3em; border-radius: .3em .3em 1.45em 1.45em / .3em .3em 1.05em 1.05em; background: rgba(255,255,255,.04); }
+.art--jar .straw { left: 60%; bottom: 20%; width: .6em; height: 8.8em; border-radius: .3em; transform: rotate(13deg); }
+.tex-blend { background: radial-gradient(ellipse 40% 22% at 30% 30%, rgba(255,255,255,.28), transparent 70%) 0 0 / 2.6em 2.2em, radial-gradient(ellipse 30% 18% at 70% 70%, rgba(0,0,0,.14), transparent 70%) 0 0 / 2.2em 2.6em, var(--c); animation: blend 7s linear infinite; }
+.tex-blend::after { content: ""; display: block; height: .45em; background: linear-gradient(180deg, rgba(255,255,255,.35), transparent); }
+@keyframes blend { to { background-position: 2.6em -2.2em, -2.2em 2.6em, 0 0; } }
+.fruit { position: absolute; z-index: 5; top: -1.3em; left: -.9em; width: 2.6em; height: 2.4em; transform-origin: 70% 100%; animation: sway 4s ease-in-out infinite; }
+.fruit i { position: absolute; }
+@keyframes sway { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(5deg); } }
+.fruit--mango i:nth-child(1) { inset: .5em 0 0; border-radius: 50% 50% 46% 46% / 70% 70% 30% 30%; background: linear-gradient(90deg, transparent 31%, rgba(150,70,0,.35) 32% 34%, transparent 35% 64%, rgba(150,70,0,.35) 65% 67%, transparent 68%), linear-gradient(180deg, transparent 38%, rgba(150,70,0,.3) 40% 43%, transparent 45%), linear-gradient(170deg, #ffd25a, #f6a821 60%, #e0861a); box-shadow: inset 0 -.2em 0 #7da23a; }
+.fruit--strawberry i:nth-child(1) { left: .4em; top: .55em; width: 1.9em; height: 1.85em; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; transform: rotate(180deg); background: radial-gradient(circle, #ffe08a 0 .05em, transparent .07em) 0 0 / .42em .38em, radial-gradient(circle at 40% 70%, #ff7a8c, #d8304a 60%, #a81c33); }
+.fruit--strawberry i:nth-child(2) { left: .65em; top: .3em; width: 1.4em; height: .55em; background: linear-gradient(90deg, #3e8f3b, #8fd06a 50%, #3e8f3b); clip-path: polygon(0 100%, 12% 0, 30% 70%, 50% 0, 70% 70%, 88% 0, 100% 100%); }
+.fruit--blueberry i { width: 1.05em; height: 1.05em; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #9fa6e8 0 .1em, transparent .25em), radial-gradient(circle at 50% 50%, #4a4f9e, #2c2a64 70%); box-shadow: inset 0 0 0 .05em rgba(255,255,255,.12); }
+.fruit--blueberry i::after { content: ""; position: absolute; left: 50%; top: 50%; width: .3em; height: .3em; margin: -.15em; border-radius: 50%; background: radial-gradient(circle, #1a1940 0 .08em, transparent .12em); }
+.fruit--blueberry i:nth-child(1) { left: .2em; top: 1.2em; }
+.fruit--blueberry i:nth-child(2) { left: 1.1em; top: 1.05em; }
+.fruit--blueberry i:nth-child(3) { left: .7em; top: .35em; }
+.fruit--passion i:nth-child(1) { left: .2em; top: .2em; width: 2.2em; height: 2.2em; border-radius: 50%; background: radial-gradient(circle, #3a1a0a 0 .07em, transparent .1em) 0 0 / .42em .4em, radial-gradient(circle, #ffc93a 0 52%, #f3a21b 62%, #f6e6c8 64% 72%, #6b2d5c 74%, #4a1d40 100%); }
+
+/* Frappé: the cream breathes */
+.whip.mo { transform-origin: 50% 100%; animation: whip 3.2s ease-in-out infinite; }
+@keyframes whip { 0%, 100% { transform: scale(1, 1); } 50% { transform: translateY(-.08em) scale(1.03, 1.08); } }
+
+/* Ice-cream coupe */
+.icecream { width: 7.6em; height: 8em; }
+.icecream i, .icecream > span { position: absolute; }
+.ic-wafer { left: 4.6em; bottom: 3.2em; width: .8em; height: 3.6em; border-radius: .2em; transform: rotate(18deg); background: repeating-linear-gradient(0deg, #e8b46a 0 .3em, #c98d45 .3em .38em); box-shadow: inset -.1em 0 0 rgba(0,0,0,.15); }
+.ic-scoops { left: .6em; right: .6em; bottom: 1.9em; height: 4.8em; transform-origin: 50% 100%; animation: scoop 3.6s ease-in-out infinite; }
+@keyframes scoop { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.025, .98); } }
+.ic-s { width: 3.1em; height: 2.9em; border-radius: 50% 50% 46% 46%; box-shadow: inset -.3em -.25em .4em rgba(0,0,0,.18), inset .25em .2em .3em rgba(255,255,255,.35); }
+.ic-s1 { left: 0; bottom: 0; background: radial-gradient(circle, #e9d8b0 0 .05em, transparent .07em) 0 0 / .5em .45em, #f7ecd2; }
+.ic-s2 { right: 0; bottom: 0; background: radial-gradient(circle, #3a1a0a 0 .06em, transparent .08em) .2em 0 / .55em .5em, #7a4224; }
+.ic-s3 { left: 1.6em; bottom: 1.75em; width: 3em; height: 2.8em; background: radial-gradient(circle, #c23a55 0 .06em, transparent .08em) 0 0 / .5em .45em, #f3a9b8; }
+.ic-sauce { left: 1.55em; bottom: 3.55em; width: 3.1em; height: 1.1em; border-radius: 50% 50% 40% 40% / 90% 90% 10% 10%; background: #5a2a12; clip-path: polygon(0 0, 100% 0, 100% 45%, 88% 100%, 78% 45%, 60% 45%, 48% 85%, 36% 45%, 18% 45%, 8% 75%, 0 45%); }
+.ic-cherry { left: 3.05em; bottom: 4.45em; width: 1em; height: 1em; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ff9a9a 0 .1em, transparent .25em), radial-gradient(circle, #e0283c, #9e0f22); animation: cherry 3.6s ease-in-out infinite; }
+.ic-cherry::before { content: ""; position: absolute; left: .5em; bottom: .85em; width: .5em; height: .9em; border-top: .09em solid #5a7a2a; border-left: .09em solid #5a7a2a; border-radius: 100% 0 0 0; }
+@keyframes cherry { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-.12em); } }
+.ic-drip { left: 1em; bottom: 1.25em; width: .42em; height: .4em; border-radius: 0 0 .25em .25em; background: #f7ecd2; transform-origin: 50% 0; animation: drip 4s ease-in infinite; }
+@keyframes drip { 0%, 15% { transform: scaleY(1); opacity: 1; } 75% { transform: scaleY(2.8); opacity: 1; } 90%, 100% { transform: scaleY(2.8); opacity: 0; } }
+.ic-bowl { left: .5em; right: .5em; bottom: .7em; height: 1.9em; border-radius: .15em .15em 3.2em 3.2em / .15em .15em 1.9em 1.9em; background: linear-gradient(90deg, #1b5f5b, #3aa59d 28%, #2c8c86 55%, #185551); box-shadow: inset 0 .16em 0 var(--gold-hi); }
+.ic-stem { left: 3.35em; bottom: 0; width: .9em; height: .9em; background: linear-gradient(90deg, #a8721c, #ffe2a0 45%, #b07a22); clip-path: polygon(25% 0, 75% 0, 100% 100%, 0 100%); }
+
 /* Sweets */
 .art--sweet .sweet { position: relative; z-index: 1; flex: none; }
 .cheesecake { width: 8.6em; height: 4.6em; }
@@ -454,7 +504,7 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; scroll-behavior: auto !important; }
   .steam i { animation: none !important; opacity: .45; transform: translateY(-.6em); }
-  .tex-fizz, .total output.bump, .ice { animation: none !important; }
+  .tex-fizz, .total output.bump, .ice, .mo, .mo * { animation: none !important; }
 }
 </style>
 </head>
@@ -550,6 +600,9 @@ const CAFE = {
 const CATEGORIES = [
   { id: "hot",    name: { ar: "مشروبات حارّة", en: "Hot" },       blurb: { ar: "تُحضَّر طازجة على المكينة.", en: "Pulled fresh on the machine." } },
   { id: "iced",   name: { ar: "مشروبات باردة", en: "Iced" },      blurb: { ar: "فوق الثلج، لأيام بغداد الحارّة.", en: "Over ice, for hot Baghdad days." } },
+  { id: "smoothies", name: { ar: "سموذي", en: "Smoothies" },  blurb: { ar: "فواكه مخفوقة مع الثلج.", en: "Fruit blended with ice." } },
+  { id: "frappe", name: { ar: "فرابيه", en: "Frappé" },       blurb: { ar: "قهوة مخفوقة مع الثلج والكريمة.", en: "Coffee blended with ice and cream." } },
+  { id: "mojito", name: { ar: "موهيتو", en: "Mojito" },       blurb: { ar: "منعش بالنعناع والليمون.", en: "Fresh with mint and lime." } },
   { id: "sweets", name: { ar: "حلويات",        en: "Sweets" },    blurb: { ar: "كيك وتارت وكوكيز.", en: "Cakes, tarts and cookies." } },
   { id: "addons", name: { ar: "إضافات",        en: "Add-ons" },   blurb: { ar: "فوق الحلويات.", en: "On top of your sweets." } },
 ];
@@ -640,6 +693,14 @@ const ITEMS = [
     name: { ar: "هوت چوكليت", en: "Hot Chocolate" },
     desc: { ar: "شوكولاتة ساخنة بالحليب.", en: "Hot chocolate made with milk." },
     art: { vessel: "cup", fill: 88, steam: true, layers: [["chocolate", 6], ["foam", 1]] } },
+  { id: "affogato", cat: "hot", price: 3500, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "افوكاتو", en: "Affogato" },
+    desc: { ar: "آيس كريم فانيلا يُسكب فوقه شوت إسبريسو ساخن.", en: "Vanilla ice cream drowned in a hot espresso shot." },
+    art: { vessel: "demitasse", fill: 80, layers: [["whiteChoc", 3], ["espresso", 2], ["crema", .6]] } },
+  { id: "caramel-macchiato", cat: "hot", price: 5000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "كراميل ماكياتو", en: "Caramel Macchiato" },
+    desc: { ar: "حليب مبخّر وإسبريسو مع صوص الكراميل.", en: "Steamed milk and espresso with caramel sauce." },
+    art: { vessel: "cup", fill: 88, steam: true, layers: [["milk", 4], ["latteMix", 1.2], ["espresso", 1.4], ["foam", 1], ["caramel", .5]] } },
 
   /* ---------- Iced ---------- */
   { id: "iced-americano", cat: "iced", price: 2500, sizes: false, extras: [], badges: [], img: "",
@@ -662,6 +723,52 @@ const ITEMS = [
     name: { ar: "آيس سبانش لاتيه", en: "Iced Spanish Latte" },
     desc: { ar: "حليب مكثّف وحليب بارد وإسبريسو، بطبقات واضحة.", en: "Condensed milk, cold milk and espresso in clear layers." },
     art: { vessel: "glass", fill: 86, ice: true, straw: true, layers: [["condensed", 2.2], ["milk", 4], ["latteMix", 1], ["espresso", 2.2]] } },
+  { id: "iced-chocolate", cat: "iced", price: 3000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "ايسد چوكليت", en: "Iced Chocolate" },
+    desc: { ar: "شوكولاتة باردة بالحليب فوق الثلج.", en: "Chilled chocolate milk over ice." },
+    art: { vessel: "glass", fill: 86, ice: true, straw: true, layers: [["chocolate", 3], ["milk", 4]] } },
+  { id: "iced-caramel-macchiato", cat: "iced", price: 5000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "ايسد كراميل ماكياتو", en: "Iced Caramel Macchiato" },
+    desc: { ar: "حليب بارد وإسبريسو وكراميل فوق الثلج.", en: "Cold milk, espresso and caramel over ice." },
+    art: { vessel: "glass", fill: 86, ice: true, straw: true, layers: [["caramel", 1], ["milk", 4], ["latteMix", 1], ["espresso", 2], ["caramel", .4]] } },
+
+  /* ---------- Smoothies ---------- */
+  { id: "mango-smoothie", cat: "smoothies", price: 4000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "منكو سموذي", en: "Mango Smoothie" },
+    desc: { ar: "منكو مخفوق مع الثلج.", en: "Mango blended with ice." },
+    art: { vessel: "jar", fill: 90, straw: true, fruit: "mango", layers: [["mango", 8]] } },
+  { id: "blueberry-smoothie", cat: "smoothies", price: 4000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "بلوبيري سموذي", en: "Blueberry Smoothie" },
+    desc: { ar: "بلوبيري مخفوق مع الثلج.", en: "Blueberries blended with ice." },
+    art: { vessel: "jar", fill: 90, straw: true, fruit: "blueberry", layers: [["blueberry", 8]] } },
+  { id: "strawberry-smoothie", cat: "smoothies", price: 4000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "ستروبيري سموذي", en: "Strawberry Smoothie" },
+    desc: { ar: "فراولة مخفوقة مع الثلج.", en: "Strawberries blended with ice." },
+    art: { vessel: "jar", fill: 90, straw: true, fruit: "strawberry", layers: [["strawberry", 8]] } },
+  { id: "passion-smoothie", cat: "smoothies", price: 4000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "باشون فروت سموذي", en: "Passion Fruit Smoothie" },
+    desc: { ar: "باشون فروت مخفوق مع الثلج.", en: "Passion fruit blended with ice." },
+    art: { vessel: "jar", fill: 90, straw: true, fruit: "passion", layers: [["passionBlend", 8]] } },
+
+  /* ---------- Frappé ---------- */
+  { id: "mocha-frappe", cat: "frappe", price: 6000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "موكا فرابيه", en: "Mocha Frappé" },
+    desc: { ar: "قهوة وشوكولاتة مخفوقة مع الثلج وكريمة.", en: "Coffee and chocolate blended with ice, topped with cream." },
+    art: { vessel: "glass", fill: 86, straw: true, whip: "cocoa", layers: [["chocolate", 1.2], ["frappe", 6]] } },
+  { id: "caramel-frappe", cat: "frappe", price: 6000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "كراميل فرابيه", en: "Caramel Frappé" },
+    desc: { ar: "قهوة وكراميل مخفوقة مع الثلج وكريمة.", en: "Coffee and caramel blended with ice, topped with cream." },
+    art: { vessel: "glass", fill: 86, straw: true, whip: "caramel", layers: [["caramel", 1.2], ["frappe", 6]] } },
+  { id: "vanilla-frappe", cat: "frappe", price: 6000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "فانيلة فرابيه", en: "Vanilla Frappé" },
+    desc: { ar: "قهوة وفانيلا مخفوقة مع الثلج وكريمة.", en: "Coffee and vanilla blended with ice, topped with cream." },
+    art: { vessel: "glass", fill: 86, straw: true, whip: "plain", layers: [["whiteChoc", 1.2], ["frappe", 6]] } },
+
+  /* ---------- Mojito ---------- */
+  { id: "mojito", cat: "mojito", price: 4000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "موهيتو", en: "Mojito" },
+    desc: { ar: "ليمون ونعناع وصودا فوق الثلج.", en: "Lime, mint and soda over ice." },
+    art: { vessel: "glass", fill: 86, ice: true, straw: true, layers: [["lemonmint", 2.5], ["soda", 5]] } },
 
   /* ---------- Sweets ---------- */
   { id: "tart", cat: "sweets", price: 4000, sizes: false, extras: [], badges: [], img: "images/tart.jpg",
@@ -692,7 +799,7 @@ const ITEMS = [
     name: { ar: "كوكيز بالكاكاو ٥٠ غم", en: "Cocoa Cookie 50 g" },
     desc: { ar: "كوكيز مضاف إليه الكاكاو الهولندي، برقائق الشوكولاتة البلجيكية، ٥٠ غرام.", en: "Cookie with added Dutch cocoa and Belgian chocolate chips, 50 g." },
     art: { sweet: "cookie", style: "cocoa", small: true } },
-  { id: "brownies", cat: "sweets", price: null, sizes: false, extras: [], badges: [], img: "images/brownies.jpg",
+  { id: "brownies", cat: "sweets", price: 5000, sizes: false, extras: [], badges: [], img: "images/brownies.jpg",
     name: { ar: "براونيز", en: "Brownies" },
     desc: { ar: "براونيز بالشوكولاتة.", en: "Chocolate brownies." },
     art: { sweet: "brownie" } },
@@ -706,6 +813,10 @@ const ITEMS = [
     name: { ar: "صوص شوكولاتة", en: "Chocolate sauce" },
     desc: { ar: "صوص شوكولاتة فوق الحلى.", en: "Chocolate sauce on top." },
     art: { vessel: "demitasse", fill: 60, layers: [["chocolate", 4]] } },
+  { id: "ice-cream", cat: "addons", price: 1000, sizes: false, extras: [], badges: [], img: "", pick: false,
+    name: { ar: "ايس كريم", en: "Ice cream" },
+    desc: { ar: "سكوب آيس كريم فوق الحلى.", en: "A scoop of ice cream on top." },
+    art: { sweet: "icecream" } },
 ];
 
 /* Badge labels (colours are in the CSS, section 6). */
@@ -739,6 +850,10 @@ const LAYERS = {
   lemonmint:    { color: "#cfe08a", tex: "pulp" },
   passion:      { color: "#f1a51d", tex: "seeds" },
   soda:         { color: "#f3d98f", tex: "fizz" },
+  passionBlend: { color: "#f3a722", tex: "blend" },
+  mango:        { color: "#f6a821", tex: "blend" },
+  blueberry:    { color: "#6a4592", tex: "blend" },
+  strawberry:   { color: "#e0566f", tex: "blend" },
 };
 
 /* #####################################################################
@@ -836,7 +951,7 @@ function drinkHTML(a) {
   const fill = a.fill == null ? 85 : a.fill;
   const layers = (a.layers || []).map(([name, amount]) => {
     const def = LAYERS[name] || { color: "#888" };
-    return `<span class="layer${def.tex ? " tex-" + def.tex : ""}" style="flex-grow:${Number(amount) || 1};--c:${esc(def.color)}"></span>`;
+    return `<span class="layer${def.tex ? " tex-" + def.tex + (def.tex === "blend" ? " mo" : "") : ""}" style="flex-grow:${Number(amount) || 1};--c:${esc(def.color)}"></span>`;
   }).join("");
   const ice = a.ice ? '<i class="ice"></i><i class="ice"></i><i class="ice"></i><i class="ice"></i>' : "";
   const g = a.garnish || [];
@@ -846,7 +961,8 @@ function drinkHTML(a) {
     + (a.spoon ? '<span class="spoon"></span>' : "")
     + (HAS_HANDLE[v] ? '<span class="handle"></span>' : "")
     + `<span class="body"><span class="inner" style="--fill:${fill}%"><span class="liquid" style="height:${fill}%">${layers}</span>${ice}</span></span>`
-    + (a.whip ? `<span class="whip whip--${esc(a.whip)}"></span>` : "")
+    + (a.whip ? `<span class="whip whip--${esc(a.whip)} mo"></span>` : "")
+    + (a.fruit ? `<span class="fruit fruit--${esc(a.fruit)} mo"><i></i><i></i><i></i></span>` : "")
     + (g.includes("mint") ? '<span class="mint"><i></i><i></i><i></i></span>' : "")
     + (g.includes("lemon") ? '<span class="lemon"></span>' : "")
     + (g.includes("date") ? '<span class="date"></span>' : "")
@@ -880,6 +996,7 @@ function sweetHTML(a) {
     brownie:    '<span class="sweet brownie"><i class="bw-top"></i><i class="bw-side"></i><i class="bw-front"></i></span>',
     kleicha:    `<span class="sweet kleicha">${kleichaArcs()}</span>`,
     croissant:  `<span class="sweet croissant">${croissantLobes()}</span>`,
+    icecream:   '<span class="sweet icecream"><i class="ic-wafer"></i><i class="ic-stem"></i><i class="ic-bowl"></i><span class="ic-scoops mo"><i class="ic-s ic-s1"></i><i class="ic-s ic-s2"></i><i class="ic-s ic-s3"></i><i class="ic-sauce"></i><i class="ic-cherry mo"></i></span><i class="ic-drip mo"></i></span>',
     cookie:     `<span class="sweet cookie${mod}"><span class="ck"><i></i><i></i><i></i><i></i><i></i><i></i></span></span>`,
   }[a.sweet] || "";
   return `<span class="art art--sweet" aria-hidden="true">${inner}<span class="plate"></span></span>`;
