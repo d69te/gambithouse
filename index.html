@@ -334,6 +334,14 @@ a { color: inherit; }
 .tex-tea { background: linear-gradient(100deg, transparent 30%, rgba(255,190,120,.28) 45%, transparent 60%) 0 0 / 300% 100%, linear-gradient(180deg, #b8401a, var(--c) 35%, #6e1d08); animation: tea-glint 4.5s ease-in-out infinite; }
 @keyframes tea-glint { 0%, 100% { background-position: 100% 0, 0 0; } 50% { background-position: 0% 0, 0 0; } }
 
+/* Tea glass (straight, thick base) */
+.art--teaglass .vessel { width: 3.9em; height: 5.6em; }
+.art--teaglass .body { clip-path: polygon(0 0, 100% 0, 91% 100%, 9% 100%); background: linear-gradient(90deg, rgba(255,255,255,.4), rgba(255,255,255,.12) 20%, rgba(255,255,255,.07) 62%, rgba(255,255,255,.3)); }
+.art--teaglass .body::before { content: ""; position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; height: .6em; background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.42)); }
+.art--teaglass .body::after { content: ""; position: absolute; z-index: 4; top: 8%; bottom: 18%; left: 15%; width: .28em; border-radius: 1em; background: linear-gradient(rgba(255,255,255,.55), rgba(255,255,255,.06)); }
+.art--teaglass .inner { left: .2em; right: .2em; top: 0; bottom: .6em; clip-path: polygon(0 0, 100% 0, 92% 100%, 8% 100%); background: rgba(255,255,255,.04); }
+.art--teaglass .spoon { left: 56%; bottom: 22%; height: 5.6em; z-index: 2; }
+
 /* Water bottle */
 .art--bottle .vessel { width: 3.6em; height: 8.4em; margin-top: .8em; }
 .art--bottle .body, .art--bottle .inner { clip-path: polygon(37% 0, 63% 0, 63% 11%, 66% 14%, 80% 21%, 93% 29%, 97% 36%, 97% 95%, 92% 100%, 8% 100%, 3% 95%, 3% 36%, 7% 29%, 20% 21%, 34% 14%, 37% 11%); }
@@ -706,9 +714,9 @@ const ITEMS = [
     desc: { ar: "شاي كرك بالحليب والهيل.", en: "Karak tea with milk and cardamom." },
     art: { vessel: "cup", fill: 84, steam: true, layers: [["karak", 6], ["foam", .8]] } },
   { id: "istikan-tea", cat: "hot", price: 500, sizes: false, extras: [], badges: [], img: "",
-    name: { ar: "استكان چاي", en: "Iraqi Tea (Istikan)" },
-    desc: { ar: "چاي عراقي بالاستكان.", en: "Iraqi tea served in an istikan glass." },
-    art: { vessel: "istikan", fill: 84, steam: true, spoon: "stir", layers: [["tea", 6]] } },
+    name: { ar: "چاي", en: "Iraqi Tea" },
+    desc: { ar: "چاي عراقي أصيل.", en: "Authentic Iraqi tea." },
+    art: { vessel: "teaglass", fill: 82, steam: true, spoon: "stir", layers: [["tea", 6]] } },
   { id: "hot-chocolate", cat: "hot", price: 3000, sizes: false, extras: [], badges: [], img: "",
     name: { ar: "هوت چوكليت", en: "Hot Chocolate" },
     desc: { ar: "شوكولاتة ساخنة بالحليب.", en: "Hot chocolate made with milk." },
