@@ -309,6 +309,7 @@ a { color: inherit; }
 /* Layer textures */
 .tex-foam  { background: radial-gradient(circle at 30% 40%, rgba(255,255,255,.8) 0 .09em, transparent .12em) 0 0 / .55em .45em, radial-gradient(circle at 70% 80%, rgba(160,120,80,.25) 0 .07em, transparent .1em) 0 0 / .7em .5em, var(--c); }
 .tex-spice { background: radial-gradient(circle at 30% 40%, rgba(255,255,255,.75) 0 .09em, transparent .12em) 0 0 / .55em .45em, radial-gradient(circle at 60% 70%, #7b6a35 0 .06em, transparent .08em) 0 0 / .45em .4em, var(--c); }
+.tex-crumbs { background: radial-gradient(circle at 30% 40%, #2a1a12 0 .1em, transparent .13em) 0 0 / 1.3em 1.1em, radial-gradient(circle at 75% 80%, rgba(42,26,18,.75) 0 .07em, transparent .1em) 0 0 / 1em 1.5em, var(--c); }
 .tex-seeds { background: radial-gradient(circle at 40% 50%, #2b1a0b 0 .1em, transparent .13em) 0 0 / .75em .65em, var(--c); }
 .tex-pulp  { background: radial-gradient(circle, rgba(60,125,40,.55) 0 .08em, transparent .1em) 0 0 / .6em .55em, var(--c); }
 .tex-fizz  { background: radial-gradient(circle at 30% 30%, transparent 0 .05em, rgba(255,255,255,.75) .06em .09em, transparent .1em) 0 0 / .7em 1em, radial-gradient(circle at 70% 70%, rgba(255,255,255,.55) 0 .05em, transparent .07em) 0 0 / .9em .8em, var(--c); animation: fizz 2.4s linear infinite; animation-play-state: paused; }
@@ -341,6 +342,56 @@ a { color: inherit; }
 .art--teaglass .body::after { content: ""; position: absolute; z-index: 4; top: 8%; bottom: 18%; left: 15%; width: .28em; border-radius: 1em; background: linear-gradient(rgba(255,255,255,.55), rgba(255,255,255,.06)); }
 .art--teaglass .inner { left: .2em; right: .2em; top: 0; bottom: .6em; clip-path: polygon(0 0, 100% 0, 92% 100%, 8% 100%); background: rgba(255,255,255,.04); }
 .art--teaglass .spoon { left: 56%; bottom: 22%; height: 5.6em; z-index: 2; }
+
+/* Milkshake: diner glass mug (handle, faceted sides, thick dimpled base), piped cream, sauce drips, flavour topper */
+.top--choc       { --sauce: #3b1c0e; --crumb: #4a2414; }
+.top--vanilla    { --sauce: transparent; }
+.top--strawberry { --sauce: #c3203b; }
+.top--lotus      { --sauce: #94501c; --crumb: #a8642a; }
+.top--oreo       { --sauce: #2a1a14; --crumb: #1e1512; }
+.art--shake .vessel { width: 5em; height: 7em; margin-inline-end: 1.4em; }
+.art--shake .body, .art--shake .inner { clip-path: polygon(0 0, 100% 0, 92% 86%, 95% 90%, 95% 100%, 5% 100%, 5% 90%, 8% 86%); }
+.art--shake .body { background: linear-gradient(180deg, rgba(255,255,255,.5) 0 .1em, transparent .1em), linear-gradient(90deg, rgba(255,255,255,.42), rgba(255,255,255,.12) 18%, rgba(255,255,255,.06) 62%, rgba(255,255,255,.32)); }
+.art--shake .body::before { content: ""; position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; height: 14%; box-shadow: inset 0 .07em 0 rgba(255,255,255,.4), inset 0 -.06em 0 rgba(255,255,255,.35); background: repeating-linear-gradient(90deg, transparent 0 .74em, rgba(255,255,255,.16) .74em .82em), linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.14)); }
+.art--shake .body::after { content: ""; position: absolute; z-index: 4; inset: 0 0 14%; background: linear-gradient(90deg, transparent 12%, rgba(255,255,255,.5) 13% 18%, transparent 19%), repeating-linear-gradient(90deg, transparent 0 .74em, rgba(255,255,255,.14) .74em .82em); }
+.art--shake .inner { left: .2em; right: .2em; top: 0; bottom: 14%; clip-path: polygon(0 0, 100% 0, 92% 100%, 8% 100%); background: rgba(255,255,255,.04); }
+.art--shake .handle { width: 2em; height: 3.6em; right: -1.5em; top: 1.5em; border-width: .5em; border-color: rgba(255,255,255,.34); border-radius: 30% 60% 60% 30%; box-shadow: inset 0 0 0 .06em rgba(255,255,255,.4), 0 0 0 .06em rgba(255,255,255,.25); }
+.art--shake .straw { left: 60%; bottom: 40%; width: .55em; height: 8em; transform: rotate(13deg); animation: straw-rock 3.6s ease-in-out infinite; }
+.art--shake .whip.mo { animation: none; }
+@keyframes straw-rock { 0%, 100% { transform: rotate(9deg); } 50% { transform: rotate(17deg); } }
+.art--shake .whip.mo { left: -.4em; right: -.4em; bottom: calc(100% - .6em); height: 3.4em; border-radius: 0; background:
+  radial-gradient(ellipse 9% 5% at 44% 26%, rgba(255,255,255,.95), transparent),
+  radial-gradient(ellipse 8% 11% at 56% 18%, #fffdf8 0 30%, #f3e6d0 70%, #d8c29e 97%, transparent 100%),
+  radial-gradient(ellipse 25% 16% at 50% 33%, #fffdf8 0 30%, #f3e6d0 70%, #d8c29e 97%, transparent 100%),
+  radial-gradient(ellipse 38% 20% at 49% 52%, #fffdf8 0 30%, #f3e6d0 70%, #d8c29e 97%, transparent 100%),
+  radial-gradient(ellipse 50% 26% at 50% 74%, #fffdf8 0 30%, #f3e6d0 70%, #d8c29e 97%, transparent 100%); }
+.art--shake .whip::before { content: ""; position: absolute; left: 16%; right: 16%; top: 42%; bottom: 14%; border-radius: 50%; background: radial-gradient(circle, var(--crumb, transparent) 0 .07em, transparent .09em) 0 0 / 1.1em .7em, radial-gradient(circle, var(--crumb, transparent) 0 .05em, transparent .07em) .55em .3em / .9em .8em, radial-gradient(circle, var(--crumb, transparent) 0 .04em, transparent .06em) .3em .5em / 1.3em .9em; }
+.art--shake .whip::after { content: ""; position: absolute; inset: 0; border-radius: 0; background:
+  radial-gradient(ellipse 7% 2.8% at 46% 27%, rgba(255,255,255,.4), transparent),
+  radial-gradient(ellipse 23% 9% at 50% 32%, var(--sauce) 95%, transparent 100%),
+  radial-gradient(ellipse 2.4% 8% at 35% 37%, var(--sauce) 90%, transparent 100%),
+  radial-gradient(ellipse 2.4% 11% at 44% 40%, var(--sauce) 90%, transparent 100%),
+  radial-gradient(ellipse 2.4% 7% at 59% 38%, var(--sauce) 90%, transparent 100%),
+  radial-gradient(ellipse 2.4% 10% at 66% 35%, var(--sauce) 90%, transparent 100%); }
+.drip { position: absolute; z-index: 2; left: 0; right: 0; top: .25em; height: 2.8em; pointer-events: none; background:
+  linear-gradient(var(--sauce), var(--sauce)) .55em 0 / .3em 1.2em no-repeat, radial-gradient(circle, var(--sauce) 0 .2em, transparent .21em) .5em .98em / .4em .44em no-repeat,
+  linear-gradient(var(--sauce), var(--sauce)) 1.5em 0 / .3em 2.1em no-repeat, radial-gradient(circle, var(--sauce) 0 .2em, transparent .21em) 1.45em 1.88em / .4em .44em no-repeat,
+  linear-gradient(var(--sauce), var(--sauce)) 3em 0 / .3em .9em no-repeat, radial-gradient(circle, var(--sauce) 0 .2em, transparent .21em) 2.95em .68em / .4em .44em no-repeat,
+  linear-gradient(var(--sauce), var(--sauce)) 3.9em 0 / .3em 1.6em no-repeat, radial-gradient(circle, var(--sauce) 0 .2em, transparent .21em) 3.85em 1.38em / .4em .44em no-repeat; }
+.topper { position: absolute; z-index: 1; left: 50%; bottom: calc(100% + 1.1em); width: 2.2em; height: 2.2em; margin-left: -1.1em; transform-origin: 50% 100%; animation: sway 4s ease-in-out infinite; }
+.topper i { position: absolute; }
+.top--vanilla .topper, .top--strawberry .topper { z-index: 4; bottom: calc(100% + 2.1em); }
+.top--oreo .topper { z-index: 4; bottom: calc(100% + 1.5em); }
+.top--choc .topper i { width: 1.5em; height: 1.3em; border-radius: .12em; background: linear-gradient(90deg, transparent 47%, rgba(0,0,0,.4) 47% 53%, transparent 53%), linear-gradient(transparent 47%, rgba(0,0,0,.4) 47% 53%, transparent 53%), linear-gradient(135deg, #8a4f2c, #4a2414 60%, #3a1a0c); box-shadow: inset .07em .07em 0 rgba(255,255,255,.2); }
+.top--choc .topper i:nth-child(1) { left: .1em; top: .2em; transform: rotate(-18deg); }
+.top--choc .topper i:nth-child(2) { left: .9em; top: .45em; transform: rotate(20deg) scale(.8); }
+.top--vanilla .topper i:nth-child(1) { left: .55em; bottom: 0; width: 1.1em; height: 1.1em; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ff9a9a 0 .08em, #d4142e .4em, #7a0818); }
+.top--vanilla .topper i:nth-child(2) { left: 1.05em; bottom: .95em; width: .55em; height: .9em; border: solid #5c7d2c; border-width: .09em .09em 0 0; border-radius: 0 100% 0 0; }
+.top--lotus .topper i:nth-child(1) { left: .05em; top: -.1em; width: 2.1em; height: 1.4em; border-radius: .14em; transform: rotate(14deg); background: linear-gradient(transparent 36%, rgba(110,50,12,.4) 36% 44%, transparent 44% 56%, rgba(110,50,12,.4) 56% 64%, transparent 64%) 22% 0 / 56% 100% no-repeat, linear-gradient(160deg, #d68a45, #b0612a 60%, #8e4a1c); box-shadow: inset 0 0 0 .08em #8a4518, inset .12em .12em 0 rgba(255,220,170,.35); }
+.top--oreo .topper i:nth-child(1) { left: .75em; top: -.2em; width: 1.5em; height: 1.5em; border-radius: 50%; transform: rotate(14deg); background: radial-gradient(circle, transparent 0 36%, rgba(255,255,255,.12) 39% 43%, transparent 46%), repeating-conic-gradient(#33261f 0 15deg, #221814 15deg 30deg); box-shadow: inset 0 0 0 .06em rgba(255,255,255,.22), 0 .08em .12em rgba(0,0,0,.35); }
+.top--oreo .topper i:nth-child(2) { left: -.1em; top: .75em; width: 1.9em; height: .85em; box-shadow: inset 0 0 0 .05em rgba(255,255,255,.2); border-radius: .35em; transform: rotate(-22deg); background: repeating-linear-gradient(90deg, transparent 0 .14em, rgba(0,0,0,.35) .14em .2em) 0 0 / 100% 36% no-repeat, repeating-linear-gradient(90deg, transparent 0 .14em, rgba(0,0,0,.35) .14em .2em) 0 100% / 100% 36% no-repeat, linear-gradient(180deg, #2c201b 0 36%, #f7f2e8 36% 64%, #2c201b 64%); }
+
+
 
 /* Water bottle */
 .art--bottle .vessel { width: 3.6em; height: 8.4em; margin-top: .8em; }
@@ -432,8 +483,8 @@ a { color: inherit; }
 .fruit i { position: absolute; }
 @keyframes sway { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(5deg); } }
 .fruit--mango i:nth-child(1) { inset: .5em 0 0; border-radius: 50% 50% 46% 46% / 70% 70% 30% 30%; background: linear-gradient(90deg, transparent 31%, rgba(150,70,0,.35) 32% 34%, transparent 35% 64%, rgba(150,70,0,.35) 65% 67%, transparent 68%), linear-gradient(180deg, transparent 38%, rgba(150,70,0,.3) 40% 43%, transparent 45%), linear-gradient(170deg, #ffd25a, #f6a821 60%, #e0861a); box-shadow: inset 0 -.2em 0 #7da23a; }
-.fruit--strawberry i:nth-child(1) { left: .4em; top: .55em; width: 1.9em; height: 1.85em; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; transform: rotate(180deg); background: radial-gradient(circle, #ffe08a 0 .05em, transparent .07em) 0 0 / .42em .38em, radial-gradient(circle at 40% 70%, #ff7a8c, #d8304a 60%, #a81c33); }
-.fruit--strawberry i:nth-child(2) { left: .65em; top: .3em; width: 1.4em; height: .55em; background: linear-gradient(90deg, #3e8f3b, #8fd06a 50%, #3e8f3b); clip-path: polygon(0 100%, 12% 0, 30% 70%, 50% 0, 70% 70%, 88% 0, 100% 100%); }
+.fruit--strawberry i:nth-child(1), .top--strawberry .topper i:nth-child(1) { left: .4em; top: .55em; width: 1.9em; height: 1.85em; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; transform: rotate(180deg); background: radial-gradient(circle, #ffe08a 0 .05em, transparent .07em) 0 0 / .42em .38em, radial-gradient(circle at 40% 70%, #ff7a8c, #d8304a 60%, #a81c33); }
+.fruit--strawberry i:nth-child(2), .top--strawberry .topper i:nth-child(2) { left: .65em; top: .3em; width: 1.4em; height: .55em; background: linear-gradient(90deg, #3e8f3b, #8fd06a 50%, #3e8f3b); clip-path: polygon(0 100%, 12% 0, 30% 70%, 50% 0, 70% 70%, 88% 0, 100% 100%); }
 .fruit--blueberry i { width: 1.05em; height: 1.05em; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #9fa6e8 0 .1em, transparent .25em), radial-gradient(circle at 50% 50%, #4a4f9e, #2c2a64 70%); box-shadow: inset 0 0 0 .05em rgba(255,255,255,.12); }
 .fruit--blueberry i::after { content: ""; position: absolute; left: 50%; top: 50%; width: .3em; height: .3em; margin: -.15em; border-radius: 50%; background: radial-gradient(circle, #1a1940 0 .08em, transparent .12em); }
 .fruit--blueberry i:nth-child(1) { left: .2em; top: 1.2em; }
@@ -626,6 +677,7 @@ const CATEGORIES = [
   { id: "iced",   name: { ar: "مشروبات باردة", en: "Iced" },      blurb: { ar: "فوق الثلج، لأيام بغداد الحارّة.", en: "Over ice, for hot Baghdad days." } },
   { id: "smoothies", name: { ar: "سموذي", en: "Smoothies" },  blurb: { ar: "فواكه مخفوقة مع الثلج.", en: "Fruit blended with ice." } },
   { id: "frappe", name: { ar: "فرابيه", en: "Frappé" },       blurb: { ar: "قهوة مخفوقة مع الثلج والكريمة.", en: "Coffee blended with ice and cream." } },
+  { id: "milkshake", name: { ar: "ميلك شيك", en: "Milkshake" }, blurb: { ar: "مخفوق كريمي وبارد.", en: "Thick, creamy and cold." } },
   { id: "mojito", name: { ar: "موهيتو", en: "Mojito" },       blurb: { ar: "منعش بالنعناع والليمون.", en: "Fresh with mint and lime." } },
   { id: "sweets", name: { ar: "حلويات",        en: "Sweets" },    blurb: { ar: "كيك وتارت وكوكيز.", en: "Cakes, tarts and cookies." } },
   { id: "addons", name: { ar: "إضافات",        en: "Add-ons" },   blurb: { ar: "فوق الحلويات.", en: "On top of your sweets." } },
@@ -796,6 +848,27 @@ const ITEMS = [
     desc: { ar: "قهوة وفانيلا مخفوقة مع الثلج وكريمة.", en: "Coffee and vanilla blended with ice, topped with cream." },
     art: { vessel: "glass", fill: 86, straw: true, whip: "plain", layers: [["whiteChoc", 1.2], ["frappeSmooth", 6]] } },
 
+  /* ---------- Milkshake ---------- */
+  { id: "choc-milkshake", cat: "milkshake", price: 5000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "چوكليت ميلك شيك", en: "Chocolate Milkshake" },
+    desc: { ar: "ميلك شيك بالشوكولاتة.", en: "Chocolate milkshake." },
+    art: { vessel: "shake", fill: 86, straw: true, whip: "plain", top: "choc", layers: [["chocolate", 1.2], ["shakeChoc", 6]] } },
+  { id: "vanilla-milkshake", cat: "milkshake", price: 5000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "فانيلة ميلك شيك", en: "Vanilla Milkshake" },
+    desc: { ar: "ميلك شيك بالفانيلا.", en: "Vanilla milkshake." },
+    art: { vessel: "shake", fill: 86, straw: true, whip: "plain", top: "vanilla", layers: [["shakeVanilla", 7]] } },
+  { id: "strawberry-milkshake", cat: "milkshake", price: 5000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "ستروبيري ميلك شيك", en: "Strawberry Milkshake" },
+    desc: { ar: "ميلك شيك بالفراولة.", en: "Strawberry milkshake." },
+    art: { vessel: "shake", fill: 86, straw: true, whip: "plain", top: "strawberry", layers: [["strawberry", 1.2], ["shakeStrawberry", 6]] } },
+  { id: "lotus-milkshake", cat: "milkshake", price: 5000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "لوتس ميلك شيك", en: "Lotus Milkshake" },
+    desc: { ar: "ميلك شيك باللوتس.", en: "Lotus biscuit milkshake." },
+    art: { vessel: "shake", fill: 86, straw: true, whip: "plain", top: "lotus", layers: [["caramel", 1.2], ["shakeLotus", 6]] } },
+  { id: "oreo-milkshake", cat: "milkshake", price: 5000, sizes: false, extras: [], badges: [], img: "",
+    name: { ar: "اوريو ميلك شيك", en: "Oreo Milkshake" },
+    desc: { ar: "ميلك شيك بالاوريو.", en: "Oreo milkshake." },
+    art: { vessel: "shake", fill: 86, straw: true, whip: "plain", top: "oreo", layers: [["chocolate", .8], ["shakeOreo", 6]] } },
   /* ---------- Mojito ---------- */
   { id: "mojito", cat: "mojito", price: 4000, sizes: false, extras: [], badges: [], img: "",
     name: { ar: "موهيتو", en: "Mojito" },
@@ -890,6 +963,11 @@ const LAYERS = {
   mango:        { color: "#f6a821", tex: "blend" },
   blueberry:    { color: "#6a4592", tex: "blend" },
   strawberry:   { color: "#e0566f", tex: "blend" },
+  shakeChoc:       { color: "#8a5236" },
+  shakeVanilla:    { color: "#f4e6c0" },
+  shakeStrawberry: { color: "#f3a9b8" },
+  shakeLotus:      { color: "#cf9a5e" },
+  shakeOreo:       { color: "#e2dad0", tex: "crumbs" },
 };
 
 /* #####################################################################
@@ -980,7 +1058,7 @@ const ICON = {
    4. DRAWINGS — builds the pure-CSS art from an item's "art" field
    ##################################################################### */
 const HAS_SAUCER = { cup: true, demitasse: true, istikan: true };
-const HAS_HANDLE = { cup: true, demitasse: true, mug: true };
+const HAS_HANDLE = { cup: true, demitasse: true, mug: true, shake: true };
 
 function drinkHTML(a) {
   const v = a.vessel || "cup";
@@ -991,13 +1069,14 @@ function drinkHTML(a) {
   }).join("");
   const ice = a.ice ? '<i class="ice"></i><i class="ice"></i><i class="ice"></i><i class="ice"></i>' : "";
   const g = a.garnish || [];
-  return `<span class="art art--${esc(v)}" aria-hidden="true"><span class="vessel">`
+  return `<span class="art art--${esc(v)}${a.top ? " top--" + esc(a.top) : ""}" aria-hidden="true"><span class="vessel">`
     + (a.steam ? '<span class="steam"><i></i><i></i><i></i></span>' : "")
-    + (a.straw ? '<span class="straw"></span>' : "")
+    + (a.straw ? `<span class="straw${v === "shake" ? " mo" : ""}"></span>` : "")
     + (a.spoon ? `<span class="spoon${a.spoon === "stir" ? " spoon--stir mo" : ""}"></span>` : "")
     + (HAS_HANDLE[v] ? '<span class="handle"></span>' : "")
     + (v === "bottle" ? '<span class="cap"></span><span class="label"></span>' : "")
     + `<span class="body"><span class="inner" style="--fill:${fill}%"><span class="liquid" style="height:${fill}%">${layers}</span>${ice}</span></span>`
+    + (a.top ? '<span class="drip"></span><span class="topper mo"><i></i><i></i></span>' : "")
     + (a.whip ? `<span class="whip whip--${esc(a.whip)} mo"></span>` : "")
     + (a.fruit ? `<span class="fruit fruit--${esc(a.fruit)} mo"><i></i><i></i><i></i></span>` : "")
     + (g.includes("mint") ? '<span class="mint"><i></i><i></i><i></i></span>' : "")
